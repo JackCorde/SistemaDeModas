@@ -20,6 +20,77 @@
 </head>
 <body>
 
+    <style>
+        .textoTrans{
+            position: absolute; /* Posicionamiento absoluto para que el texto quede superpuesto */
+            top: 50%; /* Coloca el texto en la mitad vertical del contenedor */
+            left: 50%; /* Coloca el texto en la mitad horizontal del contenedor */
+            transform: translate(-50%, -50%); /* Centra el texto */
+            text-align: center;
+            background-color: #FFFFFF80;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Familia de fuente */
+            font-weight: bold; /* Peso de la fuente */
+            font-size: 24px; /* Tamaño de la fuente */
+            color: #333; /* Color del texto */
+            letter-spacing: 2px; /* Espaciado entre letras */
+            text-transform: uppercase; /* Convertir texto a mayúsculas */
+            /* Otros estilos según sea necesario */
+        }
+        .mujer{
+            position: absolute;
+            background-image: url('/img/mujer.jpg');
+            width:100%;
+            height:100%;
+            background-size: cover;
+            background-position: center; /* Centra la imagen de fondo */
+            top: 0; /* Coloca el div en la parte superior */
+            left: 0; /* Coloca el div en la parte izquierda */
+        }
+
+        .accesorio {
+            position: absolute;
+            background-image: url('/img/accesorios.jpg');
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center; /* Centra la imagen de fondo */
+            top: 0; /* Coloca el div en la parte superior */
+            left: 0; /* Coloca el div en la parte izquierda */
+        }
+
+        .hombre {
+            position: absolute;
+            background-image: url('/img/hombre.jpg');
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center; /* Centra la imagen de fondo */
+            top: 0; /* Coloca el div en la parte superior */
+            left: 0; /* Coloca el div en la parte izquierda */
+        }
+
+        .niño {
+            position: absolute;
+            background-image: url('/img/niño.jpg');
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center; /* Centra la imagen de fondo */
+            top: 0; /* Coloca el div en la parte superior */
+            left: 0; /* Coloca el div en la parte izquierda */
+        }
+
+        .niña {
+            position: absolute;
+            background-image: url('/img/niña.jpg');
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center; /* Centra la imagen de fondo */
+            top: 0; /* Coloca el div en la parte superior */
+            left: 0; /* Coloca el div en la parte izquierda */
+        }
+    </style>
 
     <header>
         <div class="container-fluid">
@@ -36,11 +107,11 @@
                         <li class="nav-item dropdown btn" style="background-color: #A58C9B;">
                             <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><b>Catalogos</b></a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                                <li><a class="dropdown-item" href="#">Mujer</a></li>
+                                <li><a class="dropdown-item" href="#">Accesorios</a></li>
+                                <li><a class="dropdown-item" href="#">Hombre</a></li>
+                                <li><a class="dropdown-item" href="#">Niño</a></li>
+                                <li><a class="dropdown-item" href="#">Niña</a></li>
                             </ul>
                         </li>
                         &nbsp;&nbsp;&nbsp;
@@ -59,19 +130,51 @@
 
         <div class="row">
             <div class="col-4" style="padding: 0px 4px 4px 0px;">
-                <img style="width:100%; height:auto;" src="/img/mujer.jpg"/>
+                <div style="width:100%; height:300px; position: relative;">
+                    <div class="mujer">
+                        <div class="textoTrans">
+                            <p>Mujer</p>
+                        </div>
+                    </div>
+                    <!--<img style="width:100%; height:auto;" src="/img/mujer.jpg" />-->
+                </div>
             </div>
+            
             <div class="col-8" style="padding: 0px 0px 4px 4px;">
-                <img style="width:100%; height:auto;" src="/img/accesorios.jpg"/>
+                <div style="width:100%; height:300px; position: relative;">
+                    <div class="accesorio">
+                        <div class="textoTrans">
+                            <p>Accesorios</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-4" style="padding: 4px 4px 0px 0px;">
-                <img style="width:100%; height:auto;" src="/img/hombre.jpg" />
+                <div style="width:100%; height:300px; position: relative;">
+                    <div class="hombre">
+                        <div class="textoTrans">
+                            <p>Hombre</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-4" style="padding: 4px 4px 0px 4px;">
-                <img style="width:100%; height:auto;" src="/img/niño.jpg" />
+                <div style="width:100%; height:300px; position: relative;">
+                    <div class="niño">
+                        <div class="textoTrans">
+                            <p>Niño</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-4" style="padding: 4px 0px 0px 4px;">
-                <img style="width:100%; height:auto;" src="/img/niña.jpg" />
+                <div style="width:100%; height:300px; position: relative;">
+                    <div class="niña">
+                        <div class="textoTrans">
+                            <p>Niña</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             
         </div>
