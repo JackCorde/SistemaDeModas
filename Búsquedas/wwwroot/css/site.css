@@ -1,0 +1,118 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/*AGREGADO RAPIDO*/
+
+@import "colors.css";
+
+
+
+/* Titulos */
+
+.titulos {
+    color: var(--colorGenric);
+    font-weight: bold;
+}
+
+.titulosEdit {
+    color: var(--color-btn-succes);
+    font-weight: bold;
+}
+
+.titulosAsign {
+    color: var(--color-btn-cancel);
+    font-weight: bold;
+}
+
+.titulosDanger {
+    color: var(--colorDanger);
+    font-weight: bold;
+}
+
+/* Fondo */
+
+.fondoGeneric {
+    background-color: var(--color-fondo-Generic);
+    border: 1px solid var(--color-border-Generic);
+}
+
+.fondoEdit {
+    background-color: var(--colorGenric);
+    color: var(--colorText);
+}
+
+/* Boton */
+
+.btnGeneric {
+    border: none;
+    padding: .4em .8em;
+    border-radius: .5em;
+    font-size: 1em;
+}
+
+.btnSiguiente {
+    background-color: var(--color-btn-succes);
+    color: var(--colorText);
+}
+
+.btnCancelar {
+    background-color: var(--color-btn-cancel);
+    color: var(--colorText);
+}
+
+btnSiguiente:hover {
+    color: var(--colorText);
+}
+
+.btnInicio {
+    text-decoration: none;
+    color: var(--colorGenric);
+    border: 1px solid var(--colorGenric);
+}
+
+    .btnInicio:hover {
+        background-color: var(--colorGenric);
+        color: var(--colorText);
+    }
+
+.btnActivo {
+    text-decoration: none;
+    background-color: var(--colorGenric);
+    color: var(--colorText);
+}
+
+    .btnActivo:hover, .btnLogout:hover {
+        color: var(--colorText)
+    }
+
+.btnLogout {
+    background-color: var(--colorDanger);
+    color: var(--colorText) !important;
+    text-decoration: none;
+}
+
+.countLink {
+    background-color: var(--colorGenric);
+    color: var(--colorText);
+}
+
+btnAsignar {
+    background-color: var(--colorGenric);
+    color: var(--colorText);
+}

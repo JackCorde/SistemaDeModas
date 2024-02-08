@@ -1,0 +1,116 @@
+﻿@model Búsquedas.Models.ViewModels.BusquedaViewModel;
+@{
+    ViewData["Title"] = "Busqueda Simple";
+}
+<style>
+    .countLink {
+        background-color: #02639E;
+        color: #fff;
+    }
+</style>
+
+
+<div class="text-center">
+    <h1 class="display-4">Busqueda Compleja</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<br>
+<br />
+<form asp-action="Index" asp-controller="Usuario" method="post" id="formcomplejo">
+    <div class="row">
+        <div class="col-md-3 form-group">
+            <label for="talla">Talla: </label>
+            <select class="form-control" asp-for="@Model.Talla" id="talla">
+                <option value=null>Seleccione talla</option>
+                <option value=1>Extra Chica</option>
+                <option value=2>Chica</option>
+                <option value=3>Mediana</option>
+                <option value=4>Grande</option>
+                <option value=5>Extra Grande</option>
+            </select>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="categoria">Categoría: </label>
+            <select class="form-control" asp-for="@Model.Categoria" id="categoria">
+                <option value=null>Seleccione categoría</option>
+                <option value=1>Mujer</option>
+                <option value=2>Hombre</option>
+                <option value=3>Niño</option>
+                <option value=4>Niña</option>
+            </select>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="tipo">Tipo: </label>
+            <select class="form-control" asp-for="@Model.Tipo" id="tipo">
+                <option value=null>Seleccionar Tipo</option>
+                <option value=1>Blusa</option>
+                <option value=2>Playera</option>
+                <option value=3>Falda</option>
+                <option value=4>Pantalón</option>
+                <option value=5>Suéter</option>
+                <option value=6>Chaleco</option>
+            </select>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="marca">Marca: </label>
+            <select class="form-control" asp-for="@Model.Marca" id="marca">
+                <option value=null>Seleccionar Marca</option>
+                <option value=1>Valens</option>
+                <option value=2>Monty</option>
+                <option value=3>Spuky</option>
+            </select>
+        </div>
+        <label for="palabra">Búsqueda Simple (Palabra clave): </label>
+        <div class="input-group">
+            <input type="text" class="form-control" asp-for="@Model.Palabra" id="palabra" placeholder="Ingrese palabra clave">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Buscar</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<br />
+
+
+@if (ViewBag.Listado.Count == 0)
+{
+    <div class="col-md-12">
+        <div class="row py-lg-2">
+            <div class="col-lg-6 col-md-8 mx-auto text-center">
+                <h1 class="fw-light titulos">
+                    <i class="fa-regular fa-face-frown"></i>
+                </h1>
+                <p class="p-0">
+                    Sin productos encontrados
+                </p>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+
+    @foreach (var item in ViewBag.Listado)
+    {
+        <div class="col">
+            <div class="card p-1 h-100 tarjet shadow">
+
+                <div class="text-end mt-1 me-1 mb-0">
+                    <span class="text-muted">@item.Modelo</span>
+                </div>
+
+                <div class="card-body m-0 contenido">
+                    <p class="card-title tarjet-titulo m-0">Producto:  <b>@item.Tipo</b></p>
+                    <p class="card-subtitle mb-2 tarjet-subtitulo fw-bold">@item.Marca</p>
+                    <span class="text-muted"><b>Talla:</b> @item.Talla</span><br>
+                    <span class="text-muted"><b>Categoría:</b> @item.Categoria</span>
+                </div>
+            </div><br />
+        </div>
+
+    }
+
+</div>
