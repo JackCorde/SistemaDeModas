@@ -44,7 +44,7 @@
         }
 
         .hero-content {
-            padding-top: 100px;
+            padding-top: 2em;
             color: white;
         }
 
@@ -56,10 +56,13 @@
         .nav-link {
             color: #fff;
             background-color: #A58C9B;
-            /*border: 1px solid #333;*/
             padding: 7px 20px;
             border-radius: 20px;
             transition: background-color 0.3s, color 0.3s;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Familia de fuente */
+            
+            letter-spacing: 2px; /* Espaciado entre letras */
+            text-transform: uppercase; 
         }
 
             .nav-link:hover {
@@ -73,10 +76,23 @@
         .typewriter-font {
             font-family: 'Cyrillic Bodoni', serif;
             font-weight: 300;
+            font-size: 6em; 
+            color: #0E1823; 
+            margin-bottom: 30px;
+        } 
+
+        .texto-simple{
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Familia de fuente */
+            font-size: 2em; /* Tamaño de la fuente */
+            letter-spacing: 2px; /* Espaciado entre letras */
+            text-transform: uppercase; /* Convertir texto a mayúsculas */
+            /* Otros estilos según sea necesario */
+            color: #004AAD; 
+            margin-bottom: 3em;
         }
 
         .social-links a i {
-            color: rgb(0, 102, 255);
+            color: #004AAD;
             transition: color 0.3s;
         }
 
@@ -84,52 +100,52 @@
             color: black;
         }
 
-        .d-flex{
-
-        }
-
     </style>
 
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-            <div class="container">
-                <a class="navbar-brand" href="#"><img src="/img/logosensillorosa.png" class="img-fluid hero-img" alt="Hero Image" style="max-width: 100px; max-height: 100px;"></a>
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img style="max-height:3em; margin-left:4em;" src="/img/logosensillorosa.png" alt=""></a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="collapse navbar-collapse" style="margin-right: 4em;" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#contact">REGISTRATE</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">INICIA SESIÓN</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Registro">REGISTRATE</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Login">INICIA SESIÓN</a></li>
 
                     </ul>
                 </div>
             </div>
         </nav>
 
-
-        <section id="hero" class="text-center position-fixed top-0 start-50 translate-middle-x">
+        
+        <section>
+            <br><br><br><br><br><br>
             <div class="container">
-                <div class="row align-items-center">
+                <div class="row align-items-start" >
                     <div class="col-lg-6">
                         <div class="hero-content">
-                        <h1 class="typewriter-font d-flex justify-content-center justify-content-lg-start mb-4" style="font-size: 60px; color: #0E1823; margin-bottom: 30px;">BRENANT</h1>
-                            <h2 class="d-flex justify-content-center justify-content-lg-start mb-4" style="color: rgb(0, 102, 255); margin-bottom: 30px;">Vive la moda, ama tu estilo</h2>
+                            <br>
+                            <br>
+                            <h1 class="typewriter-font d-flex justify-content-center justify-content-lg-start mb-4" >BRENANT</h1>
+                            <h2 class="d-flex texto-simple justify-content-center justify-content-lg-start mb-4">Vive la moda, ama tu estilo</h2>
+                            <br>
                             <div class="d-flex justify-content-center justify-content-lg-start mb-4">
                                 <a class="nav-link btn btn-outline-light" href="#">INICIA SESIÓN</a>
                             </div>
                             <span class="d-flex justify-content-center justify-content-lg-start mb-4" style="font-size: 18px; color: black; "><b>brenantmoda</b></span>
                             <div class="social-links mb-4 d-flex justify-content-start">
-                                <a href="#" style="margin-right: 10px; color: rgb(0, 102, 255);"><i class="fab fa-instagram fa-2x"></i></a>
-                                <a href="#" style="margin-right: 10px; color: rgb(0, 102, 255);"><i class="fab fa-facebook fa-2x"></i></a>
-                                <a href="#" style="margin-right: 10px; color: rgb(0, 102, 255);"><i class="fab fa-twitter fa-2x"></i></a>
-                                <a href="#" style="color: rgb(0, 102, 255);"><i class="fab fa-linkedin fa-2x"></i></a>
+                                <a href="#" style="margin-right: 10px; color: #004AAD;"><i class="fab fa-instagram fa-2x"></i></a>
+                                <a href="#" style="margin-right: 10px; color: #004AAD;"><i class="fab fa-facebook fa-2x"></i></a>
+                                <a href="#" style="margin-right: 10px; color: #004AAD;"><i class="fab fa-twitter fa-2x"></i></a>
+                                <a href="#" style="color: #004AAD;"><i class="fab fa-linkedin fa-2x"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 d-flex justify-content-center mt-5">
-                        <img src="~/img/imgindex.png" class="img-fluid" alt="Imagen" style="max-width: 1000px; max-height: 1000px;">
+                        <img src="/img/imgindex.png" class="img-fluid" alt="Imagen" style="width: 150%;">
                     </div>
                 </div>
             </div>
