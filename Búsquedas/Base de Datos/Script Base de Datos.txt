@@ -1,0 +1,353 @@
+CREATE DATABASE TiendaRopa;
+GO 
+
+USE TiendaRopa;
+GO
+
+CREATE TABLE tipoProducto(
+	idTipoProducto INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	tipo VARCHAR(30) NOT NULL
+);
+
+INSERT INTO tipoProducto(tipo) VALUES ('Blusa');
+INSERT INTO tipoProducto(tipo) VALUES ('Playera');
+INSERT INTO tipoProducto(tipo) VALUES ('Falda');
+INSERT INTO tipoProducto(tipo) VALUES ('Pantalon');
+INSERT INTO tipoProducto(tipo) VALUES ('Sueter');
+INSERT INTO tipoProducto(tipo) VALUES ('Chaleco');
+
+CREATE TABLE tallaProducto(
+	idTallaProducto INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	talla VARCHAR(30)
+);
+
+INSERT INTO tallaProducto(talla) VALUES ('Extra Chica');
+INSERT INTO tallaProducto(talla) VALUES ('Chica');
+INSERT INTO tallaProducto(talla) VALUES ('Mediana');
+INSERT INTO tallaProducto(talla) VALUES ('Grande');
+INSERT INTO tallaProducto(talla) VALUES ('Extra Grande');
+
+CREATE TABLE categoria(
+	idCategoria INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	categoria VARCHAR(30)
+);
+
+INSERT INTO categoria(categoria) VALUES ('Mujer');
+INSERT INTO categoria(categoria) VALUES ('Hombre');
+INSERT INTO categoria(categoria) VALUES ('Niño');
+INSERT INTO categoria(categoria) VALUES ('Niña');
+
+CREATE TABLE marca(
+	idMarca INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	marca VARCHAR(30)
+);
+
+INSERT INTO marca(marca) VALUES ('Valens');
+INSERT INTO marca(marca) VALUES ('Monty');
+INSERT INTO marca(marca) VALUES ('Spuky');
+
+CREATE TABLE producto(
+ idProducto INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+ modelo VARCHAR(30) NOT NULL,
+ tipoProductoId INT NOT NULL,
+ tallaProductoId INT NOT NULL, 
+ categoriaId INT NOT NULL,
+ marcaId INT NOT NULL, 
+ CONSTRAINT fk_producto_tipoProductoId FOREIGN KEY (tipoProductoId) 
+ REFERENCES tipoProducto(idTipoProducto),
+ CONSTRAINT fk_producto_tallaProductoId FOREIGN KEY (tallaProductoId) 
+ REFERENCES tallaProducto(idTallaProducto),
+ CONSTRAINT fk_producto_categoriaId FOREIGN KEY (categoriaId) 
+ REFERENCES categoria(idCategoria),
+ CONSTRAINT fk_producto_marcaId FOREIGN KEY (marcaId) 
+ REFERENCES marca(idMarca)
+);
+
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD1', 1, 1, 1, 1);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD2', 1, 2, 1, 2);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD3', 1, 3, 1, 3);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD4', 1, 4, 4, 1);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD5', 1, 5, 4, 2);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD6', 1, 1, 4, 3);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD7', 2, 1, 1, 1);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD8', 2, 2, 2, 2);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD9', 2, 3, 3, 3);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD10', 2, 4, 4, 1);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD11', 2, 5, 1, 2);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD12', 2, 1, 2, 3);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD13', 2, 2, 3, 1);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD14', 3, 4, 1, 2);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD15', 3, 3, 3, 2);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD16', 3, 2, 4, 1);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD17', 3, 4, 3, 3);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD18', 3, 1, 4, 2);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD19', 3, 5, 2, 1);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD20', 3, 3, 1, 3);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD21', 3, 4, 2, 3);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD22', 3, 5, 4, 2);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD23', 3, 5, 3, 1);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD24', 3, 1, 1, 2);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD25', 1, 2, 4, 3);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD26', 1, 1, 3, 1);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD27', 1, 3, 2, 2);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD28', 1, 4, 1, 1);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD29', 1, 5, 1, 3);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD30', 4, 4, 4, 3);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD31', 4, 2, 3, 1);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD32', 4, 3, 4, 2);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD33', 4, 2, 2, 1);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD34', 4, 1, 1, 2);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD35', 4, 3, 2, 3);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD36', 4, 5, 3, 3);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD37', 4, 4, 4, 2);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD38', 2, 3, 3, 1);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD39', 2, 2, 2, 1);
+INSERT INTO producto(modelo, tipoProductoId,tallaProductoId, categoriaId, marcaId) VALUES ('MD40', 2, 1, 2, 2);
+
+CREATE PROCEDURE listaProductos
+AS 
+BEGIN
+SELECT 
+p.idProducto, 
+p.modelo, 
+(SELECT tipo FROM tipoProducto WHERE tipoProducto.idTipoProducto = p.tipoProductoId) as tipo, 
+(SELECT talla FROM tallaProducto WHERE tallaProducto.idTallaProducto=p.tallaProductoId) as talla, 
+(SELECT categoria FROM categoria WHERE categoria.idCategoria=p.categoriaId) as categoria,
+(SELECT marca FROM marca WHERE marca.idMarca= p.marcaId) as marca
+FROM 
+producto as p;
+END
+
+
+CREATE PROCEDURE busquedaSimple
+@Palabra NVARCHAR(50)= NULL
+AS
+BEGIN
+   IF @Palabra IS NULL
+   BEGIN
+    SELECT 
+    p.idProducto, 
+    p.modelo, 
+    (SELECT tipo FROM tipoProducto WHERE tipoProducto.idTipoProducto = p.tipoProductoId) as tipo, 
+    (SELECT talla FROM tallaProducto WHERE tallaProducto.idTallaProducto=p.tallaProductoId) as talla, 
+    (SELECT categoria FROM categoria WHERE categoria.idCategoria=p.categoriaId) as categoria,
+    (SELECT marca FROM marca WHERE marca.idMarca= p.marcaId) as marca
+    FROM 
+    producto as p;
+    END
+   ELSE
+   BEGIN
+    SELECT 
+    p.idProducto, 
+    p.modelo, 
+    (SELECT tipo FROM tipoProducto WHERE tipoProducto.idTipoProducto = p.tipoProductoId) as tipo, 
+    (SELECT talla FROM tallaProducto WHERE tallaProducto.idTallaProducto=p.tallaProductoId) as talla, 
+    (SELECT categoria FROM categoria WHERE categoria.idCategoria=p.categoriaId) as categoria,
+    (SELECT marca FROM marca WHERE marca.idMarca= p.marcaId) as marca
+    FROM 
+    producto as p 
+    WHERE
+    p.modelo LIKE '%' + @Palabra + '%' OR 
+    (SELECT tipo FROM tipoProducto WHERE tipoProducto.idTipoProducto = p.tipoProductoId) LIKE '%' + @Palabra + '%' OR
+    (SELECT talla FROM tallaProducto WHERE tallaProducto.idTallaProducto=p.tallaProductoId) LIKE '%' + @Palabra + '%' OR
+    (SELECT categoria FROM categoria WHERE categoria.idCategoria=p.categoriaId) LIKE '%' + @Palabra + '%' OR
+    (SELECT marca FROM marca WHERE marca.idMarca= p.marcaId) LIKE '%' + @Palabra + '%';
+   END
+END
+
+
+EXEC busquedaSimple
+@Palabra = 'ex'
+
+
+CREATE PROCEDURE busquedaCompleja
+	@Palabra NVARCHAR(50)= NULL,
+	@Talla INT = NULL,
+	@Categoria INT = NULL,
+	@Tipo INT = NULL,
+	@Marca INT = NULL
+AS
+BEGIN
+
+    IF @Palabra IS NULL
+    BEGIN
+        SELECT 
+		p.idProducto, 
+		p.modelo, 
+		(SELECT tipo FROM tipoProducto WHERE tipoProducto.idTipoProducto = p.tipoProductoId) as tipo, 
+		(SELECT talla FROM tallaProducto WHERE tallaProducto.idTallaProducto=p.tallaProductoId) as talla, 
+		(SELECT categoria FROM categoria WHERE categoria.idCategoria=p.categoriaId) as categoria,
+		(SELECT marca FROM marca WHERE marca.idMarca= p.marcaId) as marca
+		FROM 
+		producto as p WHERE (p.marcaId = @Marca OR @Marca IS NULL) AND (p.categoriaId = @Categoria OR @Categoria IS NULL) AND (p.tallaProductoId = @Talla OR @Talla IS NULL) AND (p.tipoProductoId = @Tipo OR @Tipo IS NULL);
+    END
+    ELSE
+    BEGIN
+        SELECT 
+		p.idProducto, 
+		p.modelo, 
+		(SELECT tipo FROM tipoProducto WHERE tipoProducto.idTipoProducto = p.tipoProductoId) as tipo, 
+		(SELECT talla FROM tallaProducto WHERE tallaProducto.idTallaProducto=p.tallaProductoId) as talla, 
+		(SELECT categoria FROM categoria WHERE categoria.idCategoria=p.categoriaId) as categoria,
+		(SELECT marca FROM marca WHERE marca.idMarca= p.marcaId) as marca
+		FROM 
+		producto as p 
+		WHERE
+			(p.marcaId = @Marca OR @Marca IS NULL) AND 
+			(p.categoriaId = @Categoria OR @Categoria IS NULL) AND 
+			(p.tallaProductoId = @Talla OR @Talla IS NULL) AND 
+			(p.tipoProductoId = @Tipo OR @Tipo IS NULL) AND 
+			(p.modelo LIKE '%' + @Palabra + '%' OR 
+			(SELECT tipo FROM tipoProducto WHERE tipoProducto.idTipoProducto = p.tipoProductoId) LIKE '%' + @Palabra + '%' OR
+			(SELECT talla FROM tallaProducto WHERE tallaProducto.idTallaProducto=p.tallaProductoId) LIKE '%' + @Palabra + '%' OR
+			(SELECT categoria FROM categoria WHERE categoria.idCategoria=p.categoriaId) LIKE '%' + @Palabra + '%' OR
+			(SELECT marca FROM marca WHERE marca.idMarca= p.marcaId) LIKE '%' + @Palabra + '%');
+	END
+END
+
+
+EXEC busquedaCompleja
+@Palabra = null,
+@Talla = null,
+@Categoria = null,
+@Tipo = null,
+@Marca = NULL
+
+
+
+
+Usuarios:
+CREATE TABLE tipoUsuario(
+	idTipoUsuario INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	tipo VARCHAR(30)
+);
+
+CREATE TABLE usuario(
+	idUsuario INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	nombre VARCHAR(50) NOT NULL,
+	apellidoPaterno VARCHAR(50) NOT NULL,
+	apellidoMaterno VARCHAR(50) NOT NULL,
+	username VARCHAR(50) NOT NULL,
+	tipoUsuarioId INT,
+	correo VARCHAR(100) NOT NULL,
+	contrasena VARCHAR(50) NOT NULL,
+	CONSTRAINT fk_usuario_tipoUsuarioId FOREIGN KEY (tipoUsuarioId) 
+	REFERENCES tipoUsuario(idTipoUsuario)
+);
+
+
+INSERT INTO tipoUsuario(tipo) VALUES ('usuario');
+INSERT INTO tipoUsuario(tipo) VALUES ('administrador');
+
+INSERT INTO usuario(nombre, apellidoPaterno, apellidoMaterno, username, tipoUsuarioId, correo, contrasena) VALUES ('Jose Antonio', 'Cordero', 'Daniel', 'Jack', 2, 'JackCorderod@outlook.com', '8254');
+
+
+
+
+
+
+
+
+CAMBIOS EN LA BD---------------------------------------------------------------------------------------------------------------------
+
+DROP TABLE usuario
+
+CREATE TABLE usuario(
+	idUsuario INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	nombre VARCHAR(50) NOT NULL,
+	apellidoPaterno VARCHAR(50) NOT NULL,
+	apellidoMaterno VARCHAR(50) NOT NULL,
+	username VARCHAR(50) UNIQUE NOT NULL,
+	tipoUsuarioId INT,
+	correo VARCHAR(100) UNIQUE NOT NULL,
+	contrasena VARCHAR(50) NOT NULL,
+	CONSTRAINT fk_usuario_tipoUsuarioId FOREIGN KEY (tipoUsuarioId) 
+	REFERENCES tipoUsuario(idTipoUsuario)
+);
+
+INSERT INTO usuario(nombre, apellidoPaterno, apellidoMaterno, username, tipoUsuarioId, correo, contrasena) VALUES ('Jose Antonio', 'Cordero', 'Daniel', 'Jack', 2, 'JackCorderod@outlook.com', '8254');
+
+
+
+CREATE TABLE comentario(
+	idComentario INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	productoId INT,
+	usuarioId INT,
+	fecha SMALLDATETIME,
+	comentario VARCHAR(100) NOT NULL,
+	CONSTRAINT fk_comentario_usuarioId FOREIGN KEY (usuarioId) 
+	REFERENCES usuario(idUsuario),
+	CONSTRAINT fk_comentario_productoId FOREIGN KEY (productoId) 
+	REFERENCES producto(idProducto)
+);
+
+CREATE PROCEDURE agregarUsuario
+	@Nombre NVARCHAR(50),
+	@ApellidoPaterno NVARCHAR(50),
+	@ApellidoMaterno NVARCHAR(50),
+	@Username NVARCHAR(30),
+	@Correo NVARCHAR(100),
+	@Contrasena NVARCHAR(100)
+	@Error BIT OUTPUT
+AS
+BEGIN
+    SET @Error = 0; -- Inicializa el indicador de error en falso
+    
+    BEGIN TRY
+        -- Intenta realizar la inserción
+        INSERT INTO usuario(nombre, apellidoPaterno, apellidoMaterno, username, correo, contrasena) 
+        VALUES (@Nombre, @ApellidoPaterno, @ApellidoMaterno, @Username, @Correo, @Contrasena);
+    END TRY
+    BEGIN CATCH
+        -- Si ocurre un error, establece el indicador de error en verdadero
+        SET @Error = 1;
+    END CATCH;
+END
+
+
+
+CREATE PROCEDURE ConsultarUsuario
+	@Username NVARCHAR(30),
+	@Contrasena NVARCHAR(50) OUTPUT,
+    @Existe BIT OUTPUT
+AS
+BEGIN
+    DECLARE @PasswordFound NVARCHAR(50);
+
+    -- Verifica si existe un usuario con el nombre de usuario proporcionado
+    IF EXISTS (SELECT contrasena FROM usuario WHERE username = @Username)
+    BEGIN
+        -- Si se encuentra la contraseña, obtén el valor y establece el indicador @Existe en TRUE
+        SELECT @PasswordFound = contrasena FROM usuario WHERE username = @Username;
+        SET @Contrasena = @PasswordFound;
+        SET @Existe = 1;
+    END
+    ELSE
+    BEGIN
+        -- Si no se encuentra la contraseña, establece @Existe en FALSE y @Contrasena en NULL
+        SET @Contrasena = NULL;
+        SET @Existe = 0;
+    END
+END
+
+
+
+CREATE PROCEDURE agregarComentario
+	@Comentario NVARCHAR(100),
+	@Producto INT,
+	@Usuario INT,
+	@Error BIT OUTPUT
+AS
+BEGIN
+	SET @Error = 0; -- Inicializa el indicador de error en falso
+    
+    BEGIN TRY
+        -- Intenta realizar la inserción
+        INSERT INTO comentario(comentario, productoId, usuarioId, fecha) VALUES (@Comentario, @Producto, @Usuario, GETDATE());
+    END TRY
+    BEGIN CATCH
+        -- Si ocurre un error, establece el indicador de error en verdadero
+        SET @Error = 1;
+    END CATCH;
+END;
+
