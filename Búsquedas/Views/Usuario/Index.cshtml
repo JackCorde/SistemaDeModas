@@ -51,6 +51,8 @@
         .texto-trans a{
             margin: 0;
             padding: 0;
+            text-decoration: none; /* Elimina la subrayado del enlace */
+            color: inherit; /* Hereda el color del texto del elemento padre */
         }
         .mujer{
             position: absolute;
@@ -160,14 +162,16 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><b>Catalogos</b></a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Mujer</a></li>
-                                <li><a class="dropdown-item" href="#">Accesorios</a></li>
-                                <li><a class="dropdown-item" href="#">Hombre</a></li>
-                                <li><a class="dropdown-item" href="#">Niño</a></li>
-                                <li><a class="dropdown-item" href="#">Niña</a></li>
+                            <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Productos" asp-route-Categoria="1">Mujer</a></li>
+                            <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Productos" asp-route-Categoria="5">Accesorios</a></li>
+                            <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Productos" asp-route-Categoria="2">Hombre</a></li>
+                            <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Productos" asp-route-Categoria="3">Niño</a></li>
+                            <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Productos" asp-route-Categoria="4">Niña</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link text-light" asp-area="" asp-controller="Usuario" asp-action="Productos"><b>Busqueda Compleja</b></a></li>
+                        <li class="nav-item">
+                        <a class="nav-link text-light" asp-action="CerrarSesion" asp-controller="Home"><b>Cerrar Sesion</b></a>
+                        </li>
 
                     </ul>
                 </div>
@@ -193,18 +197,16 @@
                 <div style="width:100%; height:300px; position: relative;">
                     <div class="mujer">
                         <div class="texto-trans">
-                            <a asp-controller="Usuario" asp-action="Productos">Mujer</a>
+                            <a asp-controller="Usuario" asp-action="Productos" asp-route-Categoria="1">Mujer</a>
                         </div>
                     </div>
                 </div>
-                
             </div>
-            
             <div class="col-8" style="padding: 0px 0px 4px 4px;">
                 <div style="width:100%; height:300px; position: relative;">
                     <div class="accesorio">
                         <div class="texto-trans">
-                            <a asp-controller="Usuario" asp-action="Productos">Accesorios</a>
+                            <a asp-controller="Usuario" asp-action="Productos" asp-route-Categoria="5">Accesorios</a>
                         </div>
                     </div>
                 </div>
@@ -213,7 +215,7 @@
                 <div style="width:100%; height:300px; position: relative;">
                     <div class="hombre">
                         <div class="texto-trans">
-                            <a asp-controller="Usuario" asp-action="Productos">Hombre</a>
+                            <a asp-controller="Usuario" asp-action="Productos" asp-route-Categoria="2">Hombre</a>
                         </div>
                     </div>
                 </div>
@@ -222,7 +224,7 @@
                 <div style="width:100%; height:300px; position: relative;">
                     <div class="nino">
                         <div class="texto-trans">
-                            <a asp-controller="Usuario" asp-action="Productos">Niño</a>
+                            <a asp-controller="Usuario" asp-action="Productos" asp-route-Categoria="3">Niño</a>
                         </div>
                     </div>
                 </div>
@@ -231,7 +233,7 @@
                 <div style="width:100%; height:300px; position: relative;">
                     <div class="nina">
                         <div class="texto-trans">
-                            <a asp-controller="Usuario" asp-action="Productos">Niña</a>
+                            <a asp-controller="Usuario" asp-action="Productos" asp-route-Categoria="4">Niña</a>
                         </div>
                     </div>
                 </div>

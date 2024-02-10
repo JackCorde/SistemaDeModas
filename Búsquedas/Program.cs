@@ -1,5 +1,6 @@
 using Búsquedas.Data;
 using Búsquedas.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,12 @@ builder.Services.AddSingleton(new Contexto(builder.Configuration.GetConnectionSt
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
+{
+    option.LoginPath = "/Home/Login";
+});
 
 var app = builder.Build();
 
@@ -26,7 +33,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

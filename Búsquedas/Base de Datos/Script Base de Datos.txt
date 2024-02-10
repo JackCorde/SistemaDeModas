@@ -288,46 +288,23 @@ CREATE PROCEDURE agregarUsuario
 	@Username NVARCHAR(30),
 	@Correo NVARCHAR(100),
 	@Contrasena NVARCHAR(100)
-	@Error BIT OUTPUT
 AS
 BEGIN
-    SET @Error = 0; -- Inicializa el indicador de error en falso
-    
-    BEGIN TRY
+	
         -- Intenta realizar la inserción
-        INSERT INTO usuario(nombre, apellidoPaterno, apellidoMaterno, username, correo, contrasena) 
-        VALUES (@Nombre, @ApellidoPaterno, @ApellidoMaterno, @Username, @Correo, @Contrasena);
-    END TRY
-    BEGIN CATCH
-        -- Si ocurre un error, establece el indicador de error en verdadero
-        SET @Error = 1;
-    END CATCH;
+        INSERT INTO usuario(nombre, apellidoPaterno, apellidoMaterno, username, correo, contrasena, tipoUsuarioId) 
+        VALUES (@Nombre, @ApellidoPaterno, @ApellidoMaterno, @Username, @Correo, @Contrasena, 1);
 END
 
 
 
 CREATE PROCEDURE ConsultarUsuario
-	@Username NVARCHAR(30),
-	@Contrasena NVARCHAR(50) OUTPUT,
-    @Existe BIT OUTPUT
+		@Username NVARCHAR(30)
 AS
 BEGIN
-    DECLARE @PasswordFound NVARCHAR(50);
-
-    -- Verifica si existe un usuario con el nombre de usuario proporcionado
-    IF EXISTS (SELECT contrasena FROM usuario WHERE username = @Username)
-    BEGIN
-        -- Si se encuentra la contraseña, obtén el valor y establece el indicador @Existe en TRUE
-        SELECT @PasswordFound = contrasena FROM usuario WHERE username = @Username;
-        SET @Contrasena = @PasswordFound;
-        SET @Existe = 1;
-    END
-    ELSE
-    BEGIN
-        -- Si no se encuentra la contraseña, establece @Existe en FALSE y @Contrasena en NULL
-        SET @Contrasena = NULL;
-        SET @Existe = 0;
-    END
+    SELECT *
+	FROM usuario
+	WHERE username=@Username
 END
 
 

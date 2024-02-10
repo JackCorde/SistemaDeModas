@@ -20,6 +20,10 @@
   </head>
   <body>
     <style>
+        h2{
+            font-family: 'Cyrillic Bodoni', serif;
+            font-weight: 300;
+        }
         body {
           font-family: Arial, sans-serif;
           background-color: white;
@@ -41,11 +45,14 @@
     
         .nav-link {
             color: #fff;
-            background-color: #555; 
-            border: 1px solid #333; 
-            padding: 7px 17px;
-            border-radius: 20px; 
+            background-color: #A58C9B;
+            padding: 7px 20px;
+            border-radius: 20px;
             transition: background-color 0.3s, color 0.3s;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Familia de fuente */
+
+            letter-spacing: 2px; /* Espaciado entre letras */
+            text-transform: uppercase;
         }
     
         .nav-link:hover {
@@ -60,7 +67,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img style="max-height:3em; margin-left:4em;" src="/img/logosensillo.png" alt=""></a>
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img style="max-height:3em; margin-left:4em;" src="/img/logosensillo.png" alt=""></a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -80,32 +87,37 @@
 
         <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
             <div class="col-lg-6 col-md-8 col-sm-10">
-                <section style="background-color: pink; border-radius: 15px; padding: 20px;">
+            <section style="background-color: #FFD0EC; border-radius: 15px; padding: 20px;">
                     <h2 class="text-black text-center mb-4">Inicia Sesión</h2>
                     <p class="text-muted text-center mb-4">Ingresa los datos solicitados</p>
 
-                    <form action="action_page.php" method="post">
+                <form asp-action="Login" method="post" asp-controller="Home">
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="uname" name="uname" placeholder="USUARIO" required>
+                            <input type="text" asp-for="Username" class="form-control" id="Username" name="Username" placeholder="USUARIO" required>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" id="psw" name="psw" placeholder="CONTRASEÑA" required>
+                            <input type="password" asp-for="Pass" class="form-control" id="Pass" name="Pass" placeholder="CONTRASEÑA" required>
                         </div>
-                        <div class="mb-3 form-check">
+                        <!--<div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="remember" name="remember" checked>
                             <label class="form-check-label text-muted " for="remember">Recuérdame</label>
                         </div>
+                        -->
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-light btn-custom mx-auto" style="border-radius: 25px; color: white; background-color: #333; width: 200px;" onmousedown="this.style.backgroundColor='black'" onmouseup="this.style.backgroundColor='#333'">INICIA SESIÓN</button>
                         </div>
                         
                         <div class="text-center mt-3">
-                            <a href="#" class="text-muted ">Recuperar Contraseña</a>
+                        <a asp-controller="Home" asp-action="Recuperar" class="text-muted ">Recuperar Contraseña</a>
                         </div>
                         <div class="text-center mt-3">
-                            <a href="#" class="text-muted ">Regístrate</a>
+                        <a asp-controller="Home" asp-action="Registro" class="text-muted ">Regístrate</a>
                         </div>
                     </form>
+                @if (ViewBag.Error != null)
+                {
+                    <div class="text-danger text-center">@ViewBag.Error</div>
+                }
                 </section>
             </div>
         </div>
