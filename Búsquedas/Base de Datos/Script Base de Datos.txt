@@ -351,3 +351,32 @@ BEGIN
     END CATCH;
 END;
 
+CREATE TABLE compras(
+	idCompra INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	usuarioId INT,
+	productoId INT,
+	statusCompra BIT, 
+	CONSTRAINT fk_compras_usuarioId FOREIGN KEY (usuarioId) 
+	REFERENCES usuario(idUsuario),
+	CONSTRAINT fk_compras_productoId FOREIGN KEY (productoId) 
+	REFERENCES producto(idProducto)
+);
+
+CREATE PROCEDURE agregarCompra
+	@Producto INT,
+	@Usuario INT,
+	@Error BIT OUTPUT
+AS
+BEGIN
+    SET @Error = 0; -- Inicializa el indicador de error en falso
+    
+    BEGIN TRY
+        -- Intenta realizar la inserción
+        INSERT INTO compras(usuarioId, productoId, statusCompra) 
+        VALUES (@Usuario, @Producto, 0);
+    END TRY
+    BEGIN CATCH
+        -- Si ocurre un error, establece el indicador de error en verdadero
+        SET @Error = 1;
+    END CATCH;
+END
