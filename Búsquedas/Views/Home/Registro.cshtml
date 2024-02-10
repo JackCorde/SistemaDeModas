@@ -61,22 +61,22 @@
 
     
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#"><img src="wwwroot/img/logosensillo.png" class="img-fluid hero-img" alt="Hero Image" style="max-width: 100px; max-height: 100px;"></a>
-    
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item"><a class="nav-link" href="#">REGISTRATE</a></li>
-              <li class="nav-item"><a class="nav-link" href="Login">INICIA SESIÓN</a></li>
-    
-            </ul>
-          </div>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img style="max-height:3em; margin-left:4em;" src="/img/logosensillo.png" alt=""></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" style="margin-right: 4em;" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Registro">REGISTRATE</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Login">INICIA SESIÓN</a></li>
+
+                </ul>
+            </div>
         </div>
-      </nav>
+    </nav>
 
 
       <div class="container">
