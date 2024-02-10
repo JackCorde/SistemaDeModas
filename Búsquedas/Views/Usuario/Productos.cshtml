@@ -2,115 +2,213 @@
 @{
     ViewData["Title"] = "Busqueda Simple";
 }
-<style>
-    .countLink {
-        background-color: #02639E;
-        color: #fff;
-    }
-</style>
-
-
-<div class="text-center">
-    <h1 class="display-4">Busqueda Compleja</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-<br>
-<br />
-<form asp-action="Index" asp-controller="Usuario" method="post" id="formcomplejo">
-    <div class="row">
-        <div class="col-md-3 form-group">
-            <label for="talla">Talla: </label>
-            <select class="form-control" asp-for="@Model.Talla" id="talla">
-                <option value=null>Seleccione talla</option>
-                <option value=1>Extra Chica</option>
-                <option value=2>Chica</option>
-                <option value=3>Mediana</option>
-                <option value=4>Grande</option>
-                <option value=5>Extra Grande</option>
-            </select>
-        </div>
-        <div class="col-md-3 form-group">
-            <label for="categoria">Categoría: </label>
-            <select class="form-control" asp-for="@Model.Categoria" id="categoria">
-                <option value=null>Seleccione categoría</option>
-                <option value=1>Mujer</option>
-                <option value=2>Hombre</option>
-                <option value=3>Niño</option>
-                <option value=4>Niña</option>
-            </select>
-        </div>
-        <div class="col-md-3 form-group">
-            <label for="tipo">Tipo: </label>
-            <select class="form-control" asp-for="@Model.Tipo" id="tipo">
-                <option value=null>Seleccionar Tipo</option>
-                <option value=1>Blusa</option>
-                <option value=2>Playera</option>
-                <option value=3>Falda</option>
-                <option value=4>Pantalón</option>
-                <option value=5>Suéter</option>
-                <option value=6>Chaleco</option>
-            </select>
-        </div>
-        <div class="col-md-3 form-group">
-            <label for="marca">Marca: </label>
-            <select class="form-control" asp-for="@Model.Marca" id="marca">
-                <option value=null>Seleccionar Marca</option>
-                <option value=1>Valens</option>
-                <option value=2>Monty</option>
-                <option value=3>Spuky</option>
-            </select>
-        </div>
-        <label for="palabra">Búsqueda Simple (Palabra clave): </label>
-        <div class="input-group">
-            <input type="text" class="form-control" asp-for="@Model.Palabra" id="palabra" placeholder="Ingrese palabra clave">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">Buscar</button>
-            </div>
-        </div>
-    </div>
-</form>
-
-
-<br />
-
-
-@if (ViewBag.Listado.Count == 0)
-{
-    <div class="col-md-12">
-        <div class="row py-lg-2">
-            <div class="col-lg-6 col-md-8 mx-auto text-center">
-                <h1 class="fw-light titulos">
-                    <i class="fa-regular fa-face-frown"></i>
-                </h1>
-                <p class="p-0">
-                    Sin productos encontrados
-                </p>
-            </div>
-        </div>
-    </div>
+@{
+    Layout = null;
 }
 
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>Inicio de Sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/styleLogin.css">
+    <script src="https://kit.fontawesome.com/dd5e6670f4.js" crossorigin="anonymous"></script>
+    <script src="~/js/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <style>
+        .countLink {
+            background-color: #02639E;
+            color: #fff;
+        }
+
+        h1 {
+            font-family: 'Cyrillic Bodoni', serif;
+            font-weight: 300;
+            color: #737373;
+            font-size: 5em;
+        }
+
+        /*NAVBAR*/
+        .navbar {
+            background-color: transparent !important;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            color: white;
+            margin-right: 15px;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+        }
+
+        .navbar-toggler {
+            border-color: white !important;
+        }
+
+        .nav-link {
+            color: #fff;
+            background-color: #A58C9B;
+            padding: 7px 20px;
+            border-radius: 20px;
+            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Familia de fuente */
+
+            letter-spacing: 2px; /* Espaciado entre letras */
+            text-transform: uppercase;
+        }
+
+            .nav-link:hover {
+                background-color: #333;
+            }
+
+        .nav-item {
+            margin-right: 10px;
+        }
+    </style>
 
 
-    @foreach (var item in ViewBag.Listado)
-    {
-        <div class="col">
-            <div class="card p-1 h-100 tarjet shadow">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img style="max-height:3em; margin-left:4em;" src="/img/logosensillo.png" alt=""></a>
 
-                <div class="text-end mt-1 me-1 mb-0">
-                    <span class="text-muted">@item.Modelo</span>
-                </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" style="margin-right: 4em;" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><b>Catalogos</b></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Mujer</a></li>
+                            <li><a class="dropdown-item" href="#">Accesorios</a></li>
+                            <li><a class="dropdown-item" href="#">Hombre</a></li>
+                            <li><a class="dropdown-item" href="#">Niño</a></li>
+                            <li><a class="dropdown-item" href="#">Niña</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link text-light" asp-area="" asp-controller="Usuario" asp-action="Productos"><b>Busqueda Compleja</b></a></li>
 
-                <div class="card-body m-0 contenido">
-                    <p class="card-title tarjet-titulo m-0">Producto:  <b>@item.Tipo</b></p>
-                    <p class="card-subtitle mb-2 tarjet-subtitulo fw-bold">@item.Marca</p>
-                    <span class="text-muted"><b>Talla:</b> @item.Talla</span><br>
-                    <span class="text-muted"><b>Categoría:</b> @item.Categoria</span>
-                </div>
-            </div><br />
+                </ul>
+            </div>
         </div>
+    </nav>
 
-    }
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-</div>
+    <div class="container">
+        <div class="text-center">
+            <h1>Busqueda Compleja</h1>
+        </div>
+        <br>
+        <br>
+        <form asp-action="Productos" asp-controller="Usuario" method="post" id="formcomplejo">
+            <div class="row">
+                <input type="hidden" asp-for="@Model.Categoria" value="1" />
+                <div class="col-md-4 form-group">
+                    <label for="talla">Talla: </label>
+                    <select class="form-control" asp-for="@Model.Talla" id="talla">
+                        <option value=null>Seleccione talla</option>
+                        <option value=1>Extra Chica</option>
+                        <option value=2>Chica</option>
+                        <option value=3>Mediana</option>
+                        <option value=4>Grande</option>
+                        <option value=5>Extra Grande</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <label for="tipo">Tipo: </label>
+                    <select class="form-control" asp-for="@Model.Tipo" id="tipo">
+                        <option value=null>Seleccionar Tipo</option>
+                        <option value=1>Blusa</option>
+                        <option value=2>Playera</option>
+                        <option value=3>Falda</option>
+                        <option value=4>Pantalón</option>
+                        <option value=5>Suéter</option>
+                        <option value=6>Chaleco</option>
+                    </select>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="marca">Marca: </label>
+                    <select class="form-control" asp-for="@Model.Marca" id="marca">
+                        <option value=null>Seleccionar Marca</option>
+                        <option value=1>Valens</option>
+                        <option value=2>Monty</option>
+                        <option value=3>Spuky</option>
+                    </select>
+                </div>
+                <label for="palabra">Búsqueda Simple (Palabra clave): </label>
+                <div class="input-group">
+                    <input type="text" class="form-control" asp-for="@Model.Palabra" id="palabra" placeholder="Ingrese palabra clave">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Buscar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+        <br />
+
+
+        @if (ViewBag.Listado.Count == 0)
+        {
+            <div class="col-md-12">
+                <div class="row py-lg-2">
+                    <div class="col-lg-6 col-md-8 mx-auto text-center">
+                        <h1 class="fw-light titulos">
+                            <i class="fa-regular fa-face-frown"></i>
+                        </h1>
+                        <p class="p-0">
+                            Sin productos encontrados
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+
+            @foreach (var item in ViewBag.Listado)
+            {
+                <div class="col">
+                    <div class="card p-1 h-100 tarjet shadow">
+
+                        <div class="text-end mt-1 me-1 mb-0">
+                            <span class="text-muted">@item.Modelo</span>
+                        </div>
+
+                        <div class="card-body m-0 contenido">
+                            <p class="card-title tarjet-titulo m-0">Producto:  <b>@item.Tipo</b></p>
+                            <p class="card-subtitle mb-2 tarjet-subtitulo fw-bold">@item.Marca</p>
+                            <span class="text-muted"><b>Talla:</b> @item.Talla</span><br>
+                            <span class="text-muted"><b>Categoría:</b> @item.Categoria</span>
+                        </div>
+                    </div><br />
+                </div>
+
+            }
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+</body>
+</html>

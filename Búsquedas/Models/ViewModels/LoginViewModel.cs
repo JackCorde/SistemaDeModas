@@ -9,6 +9,8 @@ namespace Búsquedas.Models.ViewModels
         public int? Talla { get; set; } = null!;
         public int? Marca { get; set; } = null!;
         public int? Categoria { get; set; } = null!;
+        public string? Username { get; set; }
+        public string? Pass { get; set; }
 
     }
 }

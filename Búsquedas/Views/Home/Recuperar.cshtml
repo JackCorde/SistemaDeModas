@@ -26,6 +26,12 @@
           font-family: Arial, sans-serif;
           background-color: white;
         }
+
+        h2{
+            font-family: 'Cyrillic Bodoni', serif;
+            font-weight: 300;
+        }
+
         .navbar {
           background-color: transparent !important; 
         }
@@ -43,11 +49,14 @@
     
         .nav-link {
             color: #fff;
-            background-color: #555; 
-            border: 1px solid #333; 
-            padding: 7px 17px;
-            border-radius: 20px; 
+            background-color: #A58C9B;
+            padding: 7px 20px;
+            border-radius: 20px;
             transition: background-color 0.3s, color 0.3s;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Familia de fuente */
+
+            letter-spacing: 2px; /* Espaciado entre letras */
+            text-transform: uppercase;
         }
     
         .nav-link:hover {
@@ -61,26 +70,26 @@
       </style>
     
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#"><img style="max-height:3em; margin-left:4em;" src="/img/logosensillorosa.png" alt=""></a>
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img style="max-height:3em; margin-left:4em;" src="/img/logosensillo.png" alt=""></a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" style="margin-right: 4em;" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Registro">REGISTRATE</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Login">INICIA SESIÓN</a></li>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" style="margin-right: 4em;" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Registro">REGISTRATE</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Login">INICIA SESIÓN</a></li>
 
-                    </ul>
-                </div>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
       <div class="container">
         <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
             <div class="col-lg-6 col-md-8 col-sm-10">
-                <section style="background-color: pink; border-radius: 15px; padding: 20px;">
+                <section style="background-color: #FFD0EC; border-radius: 15px; padding: 20px;">
                     <h2 class="text-black text-center mb-4">Recuperar Contraseña</h2>
                     <p class="text-muted text-center mb-4">Ingresa tu dirección electrónica</p>
     
