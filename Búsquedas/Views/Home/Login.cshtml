@@ -2,70 +2,125 @@
 @{
     ViewData["Title"] = "Busqueda Simple";
 }
+
+@{
+    Layout = null;
+}
+
+
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inicio de Sesión</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="~/css/styleLogin.css">
-    <script src="https://kit.fontawesome.com/dd5e6670f4.js" crossorigin="anonymous"></script>
-    <script src="~/js/jquery-3.6.4.min.js"></script>
-    <script src="~/js/Inicio/validLogin-Pass.js"></script>
-</head>
-<body>
+    <title>inicio </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  </head>
+  <body>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: white;
+        }
+        .navbar {
+          background-color: transparent !important; 
+        }
+        .navbar-brand {
+          font-size: 24px;
+          color: white; 
+          margin-right: 15px; 
+        }
+        .navbar-nav .nav-link {
+          color: white !important; 
+        }
+        .navbar-toggler {
+          border-color: white !important; 
+        }
+    
+        .nav-link {
+            color: #fff;
+            background-color: #555; 
+            border: 1px solid #333; 
+            padding: 7px 17px;
+            border-radius: 20px; 
+            transition: background-color 0.3s, color 0.3s;
+        }
+    
+        .nav-link:hover {
+            background-color: #333;
+        }
+    
+        .nav-item {
+            margin-right: 10px;
+        }
 
-    <div class="lienzo">
-        <div class="container w-100">
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6 text-center">
-                    <h1 class="fw-bold text-center titulos">RequirEZ</h1><br>
+      </style>
+      
+       <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img style="max-height:3em; margin-left:4em;" src="/img/logosensilo.png" alt=""></a>
 
-                    <form asp-action="Login" method="post" asp-controller="Home" class="shadow-lg p-4 rounded-5 fondo" id="login">
-                        <div class="form-group ">
-                            <div class="text-center">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" style="margin-right: 4em;" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Registro">REGISTRATE</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Login">INICIA SESIÓN</a></li>
 
-                                <div class="form-floating">
-                                    <input type="text" class="form-control mt-2" id="Username" asp-for="Username" placeholder="name@example.com" required>
-                                    <label for="Username">Nombre de usuario</label>
-                                    <div class="invalid-feedback text-light">Por favor, escribe un nombre de usuario <i class="fa-solid fa-triangle-exclamation"></i></div>
-                                    @*<span asp-validation-for="Username" class="text-danger"></span>*@
-                                </div><br>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-                                <div class="form-floating">
-                                    <input type="password" class="form-control mt-2" id="Pass" asp-for="Pass" placeholder="Password" minlength="5" maxlength="20" required>
-                                    <label for="Pass">Contraseña</label>
-                                    <div class="invalid-feedback text-light">Por favor, escribe una contraseña <i class="fa-solid fa-triangle-exclamation"></i></div>
-                                    @*<span asp-validation-for="Pass" class="text-danger"></span>*@
-                                </div>
-                                <div class="text-center form-floating">
-                                    <div class="text-end mt-2">
-                                        <a asp-action="Recuperar" asp-controller="Home" class="text-dark">¿Olvidaste tu contraseña?</a>
-                                    </div>
-                                </div>
+      <div class="container">
+       
+        
+      
 
-                            </div><br>
-                            <div class="text-center">
-                                <button class="btn-logeo" type="submit" id="btnLogin">Inicio de Sesión</button>
-                            </div>
+        <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+            <div class="col-lg-6 col-md-8 col-sm-10">
+                <section style="background-color: pink; border-radius: 15px; padding: 20px;">
+                    <h2 class="text-black text-center mb-4">Inicia Sesión</h2>
+                    <p class="text-muted text-center mb-4">Ingresa los datos solicitados</p>
 
+                    <form action="action_page.php" method="post">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="uname" name="uname" placeholder="USUARIO" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" id="psw" name="psw" placeholder="CONTRASEÑA" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="remember" name="remember" checked>
+                            <label class="form-check-label text-muted " for="remember">Recuérdame</label>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-light btn-custom mx-auto" style="border-radius: 25px; color: white; background-color: #333; width: 200px;" onmousedown="this.style.backgroundColor='black'" onmouseup="this.style.backgroundColor='#333'">INICIA SESIÓN</button>
+                        </div>
+                        
+                        <div class="text-center mt-3">
+                            <a href="#" class="text-muted ">Recuperar Contraseña</a>
+                        </div>
+                        <div class="text-center mt-3">
+                            <a href="#" class="text-muted ">Regístrate</a>
                         </div>
                     </form>
-
-                    @if (ViewBag.Error != null)
-                    {
-                        <div class="text-danger text-center">@ViewBag.Error</div>
-                    }
-                </div>
-                <div class="col-md-3"></div>
+                </section>
             </div>
         </div>
-    </div>
+    
+    
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
-</body>
+ 
+    
+    
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>  
+    
+   </body>
 </html>
+
+
