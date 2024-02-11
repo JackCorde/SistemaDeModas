@@ -6,6 +6,10 @@ using Búsquedas.Models.ViewModels;
 using Búsquedas.Models;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Text.RegularExpressions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Búsquedas.Controllers
 {
@@ -22,6 +26,45 @@ namespace Búsquedas.Controllers
             _generalServicio = new GeneralServicio(contexto);
         }
 
+
+        [Authorize]
+        public ActionResult Index()
+        {
+            return View();
+        }
+        [Authorize]
+        public ActionResult Compras(int id, string? Error)
+        {
+            var listado = _generalServicio.ListarCompras(id);
+            ViewBag.Compras = listado;
+            ViewBag.Error = Error;
+            return View();
+        }
+        [Authorize]
+        public ActionResult Comprar(int id, int user)
+        {
+            using (var connection = new SqlConnection(_contexto.Conexion))
+            {
+                connection.Open();
+                using (var command = new SqlCommand("agregarCompra", connection))
+                {
+                    try
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@Producto", id);
+                        command.Parameters.AddWithValue("@Usuario", user);
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception)
+                    {
+                        return RedirectToAction("Compras", "Usuario", new { id = user, Error = "No se pudo registrar el nuevo comentario" });
+                    }
+                }
+            }
+            return RedirectToAction("Compras", "Usuario", new { id = user });
+        }
+
+        [Authorize]
         // GET: UsuarioController
         public ActionResult Productos(BusquedaViewModel Busqueda)
         {
@@ -35,6 +78,7 @@ namespace Búsquedas.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Detalles(int id)
         {
             Producto  producto = _generalServicio.ConsultarProducto(id);
@@ -45,11 +89,8 @@ namespace Búsquedas.Controllers
         }
 
 
-        public ActionResult Index()
-        {
-            return View();
-        }
 
+        [Authorize]
         public ActionResult Comentario(Comentario model)
         {
             using (var connection = new SqlConnection(_contexto.Conexion))

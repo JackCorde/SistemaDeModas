@@ -147,5 +147,131 @@ namespace Búsquedas.Data.Servicios
             return model;
         }
 
+        public List<Compra> ListarCompras(int id)
+        {
+            var model = new List<Compra>();
+            using (var connection = new SqlConnection(_contexto.Conexion))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new("consultarCompras", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        model.Add(new Compra
+                        {
+                            IdCompra = (int)reader["idCompra"],
+                            UsuarioNombre = (string)reader["usuarioNombre"],
+                            StatusCompra = (bool)reader["statusCompra"],
+                            UsuarioId = (int)reader["usuarioId"],
+                            Fecha = (DateTime)reader["fecha"],
+                            ProductoId = (int)reader["productoId"],
+                            Modelo = (String)reader["modelo"],
+                            Tipo = (String)reader["tipo"],
+                            Talla = (String)reader["talla"],
+                            Categoria = (String)reader["categoria"],
+                            Marca = (String)reader["marca"]
+                        });
+
+                    }
+                }
+            }
+            return model;
+        }
+
+        public int ObtenerUsuarioPorCorreo(string correo)
+        {
+            int usuario=0;
+            using (var connection = new SqlConnection(_contexto.Conexion))
+            {
+                using (SqlCommand cmd = new("obtenerUsuarioPorCorreo", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Correo", correo);
+                    connection.Open();
+                    var rdr = cmd.ExecuteReader();
+
+                    if (rdr.Read())
+                    {
+                        usuario = (int)rdr["idUsuario"];
+                    }
+                    rdr.Close();
+                }
+            }
+            return usuario;
+        }
+
+
+        public List<Compra> ListarComprasAdmin()
+        {
+            var model = new List<Compra>();
+            using (var connection = new SqlConnection(_contexto.Conexion))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new("consultarComprasAdmin", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        model.Add(new Compra
+                        {
+                            IdCompra = (int)reader["idCompra"],
+                            UsuarioNombre = (string)reader["usuarioNombre"],
+                            StatusCompra = (bool)reader["statusCompra"],
+                            UsuarioId = (int)reader["usuarioId"],
+                            Fecha = (DateTime)reader["fecha"],
+                            ProductoId = (int)reader["productoId"],
+                            Modelo = (String)reader["modelo"],
+                            Tipo = (String)reader["tipo"],
+                            Talla = (String)reader["talla"],
+                            Categoria = (String)reader["categoria"],
+                            Marca = (String)reader["marca"]
+                        });
+
+                    }
+                }
+            }
+            return model;
+        }
+
+        public List<Compra> ListarComprasPendientes()
+        {
+            var model = new List<Compra>();
+            using (var connection = new SqlConnection(_contexto.Conexion))
+            {
+                connection.Open();
+                using (SqlCommand cmd = new("consultarComprasPendientes", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        model.Add(new Compra
+                        {
+                            IdCompra = (int)reader["idCompra"],
+                            UsuarioNombre = (string)reader["usuarioNombre"],
+                            StatusCompra = (bool)reader["statusCompra"],
+                            UsuarioId = (int)reader["usuarioId"],
+                            Fecha = (DateTime)reader["fecha"],
+                            ProductoId = (int)reader["productoId"],
+                            Modelo = (String)reader["modelo"],
+                            Tipo = (String)reader["tipo"],
+                            Talla = (String)reader["talla"],
+                            Categoria = (String)reader["categoria"],
+                            Marca = (String)reader["marca"]
+                        });
+
+                    }
+                }
+            }
+            return model;
+        }
+
     }
 }

@@ -333,6 +333,7 @@ CREATE TABLE compras(
 	usuarioId INT,
 	productoId INT,
 	statusCompra BIT, 
+	fecha SMALLDATETIME NOT NULL,
 	CONSTRAINT fk_compras_usuarioId FOREIGN KEY (usuarioId) 
 	REFERENCES usuario(idUsuario),
 	CONSTRAINT fk_compras_productoId FOREIGN KEY (productoId) 
@@ -341,21 +342,14 @@ CREATE TABLE compras(
 
 CREATE PROCEDURE agregarCompra
 	@Producto INT,
-	@Usuario INT,
-	@Error BIT OUTPUT
+	@Usuario INT
 AS
 BEGIN
-    SET @Error = 0; -- Inicializa el indicador de error en falso
     
-    BEGIN TRY
         -- Intenta realizar la inserción
-        INSERT INTO compras(usuarioId, productoId, statusCompra) 
-        VALUES (@Usuario, @Producto, 0);
-    END TRY
-    BEGIN CATCH
-        -- Si ocurre un error, establece el indicador de error en verdadero
-        SET @Error = 1;
-    END CATCH;
+        INSERT INTO compras(usuarioId, productoId, statusCompra, fecha) 
+        VALUES (@Usuario, @Producto, 0, GETDATE());
+    
 END
 
 
@@ -385,4 +379,74 @@ BEGIN
 		comentario.comentario
 	FROM comentario 
 	WHERE productoId=@Id;
+END
+
+ALTER TABLE compras ADD fecha SMALLDATETIME NOT NULL;
+
+
+CREATE PROCEDURE consultarCompras
+	@Id INT
+AS
+BEGIN
+	SELECT c.*,
+		(SELECT modelo FROM producto WHERE idProducto = c.productoId) as modelo,
+		(SELECT tipo FROM tipoProducto, producto 
+			WHERE tipoProducto.idTipoProducto = producto.tipoProductoId AND idProducto = c.productoId ) as tipo, 
+		(SELECT talla FROM tallaProducto, producto 
+			WHERE tallaProducto.idTallaProducto=producto.tallaProductoId AND producto.idProducto=c.productoId) as talla, 
+		(SELECT categoria FROM categoria, producto 
+			WHERE categoria.idCategoria=producto.categoriaId AND producto.idProducto=c.productoId) as categoria,
+		(SELECT marca FROM marca, producto WHERE marca.idMarca= producto.marcaId AND producto.idProducto=c.productoId) as marca,
+		(SELECT nombre FROM usuario WHERE usuario.idUsuario=c.usuarioId) as usuarioNombre
+	FROM compras as c
+	WHERE c.usuarioId=@Id;
+END
+
+
+CREATE PROCEDURE obtenerUsuarioPorCorreo
+	@Correo VARCHAR(100)
+AS BEGIN
+	SELECT idUsuario FROM usuario WHERE correo=@Correo;
+END
+
+
+CREATE PROCEDURE consultarComprasAdmin
+AS
+BEGIN
+	SELECT c.*,
+		(SELECT modelo FROM producto WHERE idProducto = c.productoId) as modelo,
+		(SELECT tipo FROM tipoProducto, producto 
+			WHERE tipoProducto.idTipoProducto = producto.tipoProductoId AND idProducto = c.productoId ) as tipo, 
+		(SELECT talla FROM tallaProducto, producto 
+			WHERE tallaProducto.idTallaProducto=producto.tallaProductoId AND producto.idProducto=c.productoId) as talla, 
+		(SELECT categoria FROM categoria, producto 
+			WHERE categoria.idCategoria=producto.categoriaId AND producto.idProducto=c.productoId) as categoria,
+		(SELECT marca FROM marca, producto WHERE marca.idMarca= producto.marcaId AND producto.idProducto=c.productoId) as marca,
+		(SELECT nombre FROM usuario WHERE usuario.idUsuario=c.usuarioId) as usuarioNombre
+	FROM compras as c;
+END
+
+
+CREATE PROCEDURE consultarComprasPendientes
+AS
+BEGIN
+	SELECT c.*,
+		(SELECT modelo FROM producto WHERE idProducto = c.productoId) as modelo,
+		(SELECT tipo FROM tipoProducto, producto 
+			WHERE tipoProducto.idTipoProducto = producto.tipoProductoId AND idProducto = c.productoId ) as tipo, 
+		(SELECT talla FROM tallaProducto, producto 
+			WHERE tallaProducto.idTallaProducto=producto.tallaProductoId AND producto.idProducto=c.productoId) as talla, 
+		(SELECT categoria FROM categoria, producto 
+			WHERE categoria.idCategoria=producto.categoriaId AND producto.idProducto=c.productoId) as categoria,
+		(SELECT marca FROM marca, producto WHERE marca.idMarca= producto.marcaId AND producto.idProducto=c.productoId) as marca,
+		(SELECT nombre FROM usuario WHERE usuario.idUsuario=c.usuarioId) as usuarioNombre
+	FROM compras as c
+	WHERE c.statusCompra=0;
+END
+
+CREATE PROCEDURE confirmarCompra
+	 @Id INT
+AS
+BEGIN
+	UPDATE compras SET statusCompra=1 WHERE idCompra=@Id;
 END

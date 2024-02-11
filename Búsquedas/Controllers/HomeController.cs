@@ -39,7 +39,7 @@ namespace Búsquedas.Controllers
             return View();
         }
 
-        public IActionResult Login()
+        public IActionResult Login(string? Error)
         {
             ClaimsPrincipal c = HttpContext.User;
             if (c.Identity != null)
@@ -47,6 +47,7 @@ namespace Búsquedas.Controllers
                 if (c.Identity.IsAuthenticated)
                     return RedirectToAction("Index", "Usuario");
             }
+            ViewBag.Error=Error;
             return View();
         }
 
@@ -54,8 +55,6 @@ namespace Búsquedas.Controllers
 
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (!ModelState.IsValid)
-                return View("Login");
 
             try
             {
@@ -109,8 +108,14 @@ namespace Búsquedas.Controllers
                                             };
 
                                             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identify), propiedades);
-
-                                            return RedirectToAction("Index", "Usuario");
+                                            if (perfilNombre == "Administrador")
+                                            {
+                                                return RedirectToAction("Index", "Admin");
+                                            }
+                                            else {
+                                                return RedirectToAction("Index", "Usuario");
+                                            }
+                                            
                                         }
                                     }
                                 }
@@ -171,7 +176,7 @@ namespace Búsquedas.Controllers
                             }
                         }
                     }
-                    return RedirectToAction("Registro");
+                    return RedirectToAction("Login");
                 }
                 catch (SqlException ex)
                 {
@@ -194,10 +199,7 @@ namespace Búsquedas.Controllers
         }
 
         
-        public IActionResult Recuperar(BusquedaViewModel Busqueda)
-        {
-            return View();
-        }
+        
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -211,5 +213,70 @@ namespace Búsquedas.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
+
+
+        public IActionResult Recuperar(string? Error)
+        {
+            ViewBag.Error = Error;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Recuperacion(LoginViewModel model)
+        {
+            try
+            {
+                var usuarioId = _generalServicio.ObtenerUsuarioPorCorreo(model.Correo);
+                if (usuarioId == 0)
+                {
+                    ViewBag.Error = "Correo no registrado";
+                    return View("Recuperar");
+                }
+                else
+                {
+                    using (var con = new SqlConnection(_contexto.Conexion))
+                    {
+                        string pass = GeneratePass(8);
+                        try
+                        {
+                            using (SqlCommand cmd2 = new("actualizarPass", con))
+                            {
+                                //var usuario = _generalServicio.ObtenerUsuarioPorCorreo(model.Correo);
+                                cmd2.CommandType = CommandType.StoredProcedure;
+                                cmd2.Parameters.AddWithValue("@Id", usuarioId);
+                                cmd2.Parameters.AddWithValue("@Contrasena", pass);
+                                con.Open();
+                                cmd2.ExecuteNonQuery();
+
+                                Email email = new();
+                                email.Enviar(model.Correo, pass);
+                            }
+                            ViewBag.Error = "Hemos enviado tu nueva contraseña a tu correo";
+                            return View("Login");
+                        }
+                        catch (SqlException ex)
+                        {
+                            ViewBag.Error = ex.Message;
+                            return View("Recuperar");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View("Recuperar");
+            }
+        }
+
+        public static string GeneratePass(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var random = new Random();
+            var result = new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+            return result;
+        }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Búsquedas.Models.ViewModels.BusquedaViewModel;
+﻿@model Búsquedas.Models.ViewModels.LoginViewModel;
 @{
     ViewData["Title"] = "Recuperar";
 }
@@ -6,8 +6,6 @@
 @{
     Layout = null;
 }
-
-
 
 
 <!doctype html>
@@ -93,15 +91,19 @@
                     <h2 class="text-black text-center mb-4">Recuperar Contraseña</h2>
                     <p class="text-muted text-center mb-4">Ingresa tu dirección electrónica</p>
     
-                    <form action="action_page.php" method="post">
+                    <form asp-action="Recuperacion" method="post" asp-controller="Home">
                         <div class="mb-3">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Correo Electrónico" required>
+                            <input type="email" class="form-control" asp-for="Correo" id="Correo" placeholder="Correo Electrónico" required>
                         </div>
                         
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-light btn-custom mx-auto" style="border-radius: 25px; color: white; background-color: #333; width: 200px;" onmousedown="this.style.backgroundColor='black'" onmouseup="this.style.backgroundColor='#333'">RECUPERAR</button>
                         </div>
                     </form>
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="text-danger text-center">@ViewBag.Error</div>
+                    }
                 </section>
             </div>
         </div>
