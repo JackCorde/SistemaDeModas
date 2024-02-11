@@ -3,6 +3,9 @@ using Búsquedas.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Búsquedas.Models.ViewModels;
+using Búsquedas.Models;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace Búsquedas.Controllers
 {
@@ -32,13 +35,44 @@ namespace Búsquedas.Controllers
             return View();
         }
 
+        public ActionResult Detalles(int id)
+        {
+            Producto  producto = _generalServicio.ConsultarProducto(id);
+            ViewBag.Producto = producto;
+            var Comentarios = _generalServicio.ConsultarComentarios(id);
+            ViewBag.Comentarios = Comentarios;
+            return View();
+        }
+
 
         public ActionResult Index()
         {
             return View();
         }
 
-
+        public ActionResult Comentario(Comentario model)
+        {
+            using (var connection = new SqlConnection(_contexto.Conexion))
+            {
+                connection.Open();
+                using (var command = new SqlCommand("agregarComentario", connection))
+                {
+                    try
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@Comentario", model.Contenido);
+                        command.Parameters.AddWithValue("@Producto", model.ProductoId);
+                        command.Parameters.AddWithValue("@Usuario", model.UsuarioId);
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception)
+                    {
+                        return RedirectToAction("Detalles", "Usuario", new { id = model.ProductoId, Error = "No se pudo registrar el nuevo comentario" });
+                    }
+                }
+            }
+            return RedirectToAction("Detalles", "Usuario", new {id=model.ProductoId});
+        }
 
     }
 }
