@@ -1,4 +1,5 @@
 ﻿@model Búsquedas.Models.ViewModels.BusquedaViewModel;
+@using System.Security.Claims;
 @{
     ViewData["Title"] = "Busqueda Simple";
 }
@@ -79,25 +80,28 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img style="max-height:3em; margin-left:4em;" src="/img/logosensillo.png" alt=""></a>
+            <a class="navbar-brand" asp-action="Index" asp-controller="Usuario"><img style="max-height:3em; margin-left:4em;" src="/img/logosensillo.png" alt=""></a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" style="margin-right: 4em;" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-light" asp-action="Index" asp-controller="Usuario"><b>Inicio</b></a></li>
+                    <li class="nav-item"><a class="nav-link text-light" asp-action="Compras" asp-controller="Usuario" asp-route-id="@User.FindFirstValue(ClaimTypes.SerialNumber)">Tus Compras</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><b>Catalogos</b></a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Mujer</a></li>
-                            <li><a class="dropdown-item" href="#">Accesorios</a></li>
-                            <li><a class="dropdown-item" href="#">Hombre</a></li>
-                            <li><a class="dropdown-item" href="#">Niño</a></li>
-                            <li><a class="dropdown-item" href="#">Niña</a></li>
+                            <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Productos" asp-route-Categoria="1">Mujer</a></li>
+                            <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Productos" asp-route-Categoria="5">Accesorios</a></li>
+                            <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Productos" asp-route-Categoria="2">Hombre</a></li>
+                            <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Productos" asp-route-Categoria="3">Niño</a></li>
+                            <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Productos" asp-route-Categoria="4">Niña</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link text-light" asp-area="" asp-controller="Usuario" asp-action="Productos"><b>Busqueda Compleja</b></a></li>
-
+                    <li>
+                        <a class="nav-link text-light" asp-action="CerrarSesion" asp-controller="Home"><b>Cerrar Sesion</b></a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -144,7 +148,7 @@
                 </div>
                 <div class="col-md-4 form-group">
                     <label for="marca">Marca: </label>
-                    <select class="form-control" asp-for="@Model.Marca" id="marca">
+                    <select class="form-control" asp-for="@Model.Marca" id="marca" >
                         <option value=null>Seleccionar Marca</option>
                         <option value=1>Valens</option>
                         <option value=2>Monty</option>
@@ -198,6 +202,10 @@
                             <p class="card-subtitle mb-2 tarjet-subtitulo fw-bold">@item.Marca</p>
                             <span class="text-muted"><b>Talla:</b> @item.Talla</span><br>
                             <span class="text-muted"><b>Categoría:</b> @item.Categoria</span>
+                        </div>
+                        <div class="footer text-center mb-1">
+                            <a class="card-link link-danger titulosDanger text-decoration-none" asp-action="Comprar" asp-controller="Usuario" asp-route-id="@item.IdProducto" asp-route-user="@User.FindFirstValue(ClaimTypes.SerialNumber)">Comprar</a>
+                            <a class="card-link  titulos text-decoration-none" asp-action="Detalles" asp-controller="Usuario" asp-route-id="@item.IdProducto">Mas detalles...</a>
                         </div>
                     </div><br />
                 </div>
